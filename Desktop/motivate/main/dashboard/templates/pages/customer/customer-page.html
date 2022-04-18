@@ -1,0 +1,80 @@
+{% extends 'pages/customer/customer.html' %}
+
+{% load static %}
+    
+{% block customer %}
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="rounded">
+                {% if customer.passport %}
+                    <img src="{{ customer.passport.url }}" width="100%" height="auto" alt="" class="rounded">
+                {% else %}
+
+                <img src="{% static 'img/profile-icon.jpg' %}" width="100%" height="auto" alt="" class="rounded">
+
+                {% endif %}
+    
+                <br><br>
+                <p class="action btn btn-outline-primary bg-light p-2 rounded w-100"><a class="" href="#">click here to view customers document</a></p></p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            
+            <div class="table-responsive my-4">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <h4>Personal Details</h4>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                    <tr>
+                        <td>{{ customer.firstName }}</td>
+                        <td>{{ customer.surname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <th>Date Registered</th>
+                    </tr>
+                    <tr>
+                        <td>Male</td>
+                        <td>{{ customer.dateRegistered }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                    <tr>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.phoneNumber }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <th>Career</th>
+                    </tr>
+                    <tr>
+                        <td>{{ customer.customerHomeAddress }}</td>
+                        <td>{{ customer.employer }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date Registered</th>
+                        <th>Marital Status</th>
+                    </tr>
+                    <tr>
+                        <td>{{ customer.dateRegistered }}</td>
+                        <td>{{ customer.maritalstatus }}</td>
+                    </tr>
+                    <tr>
+                        <th>Heard From</th>
+                    </tr>
+                    <tr>
+                        <td>{{ customer.heard_about_person }}</td>
+                    </tr>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+   
+{% endblock %} 
+ 

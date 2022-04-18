@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family:Verdana, Geneva, Tahoma, sans-serif
+        }
+        .canvas{
+            width: 1000px;
+            height: 500px;
+            border: solid 1px red;
+            margin: auto;
+            margin-top: 20px;
+            background-image: url({% static 'img/SW-bgc.png' %});
+        }
+
+        .receipt_header{
+            width: 100%;
+            height: 150px;
+            display: flex;
+        }
+
+        .receipt_header_left{
+            width: 30%;
+            border-right: solid 2px #000066;
+        }
+
+        .receipt_header_right{
+            width: 70%;
+            padding: 5px 10px 5px 20px;   
+        }
+
+        .red-text{
+            color: red;
+            font-size: 18px;
+        }
+
+        .type{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            margin: 10px 0 10px 0;
+        }
+
+        .l-text{
+
+            padding: 5px 10px;
+            border-radius: 50px;
+            background-color: red;
+            color: #fff;
+        }
+        
+        .r-text{
+            padding: 5px 10px;
+            border-radius: 50px;
+            background-color: red;
+            color: #fff;
+        }
+
+        .r-text button{
+            border: none;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 5px 10px;
+        }
+
+        table{
+            width: 90%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin: auto;
+        }
+
+        .tr{
+            margin: 10px 0;
+            border: solid 1px red;
+            padding: 20px;
+        }
+
+        .table-info{
+            background-color: #fff;
+            color: #000066;
+            font-size: normal;
+            width: 40%;
+            border-radius: 10px;
+            padding: 5px 10px;
+        }
+
+        .table-data{
+            background-color: #000066;
+            color: #fff;
+            font-size: larger;
+            width: 60%;
+            border-radius: 10px;
+            padding: 5px 10px;
+        }
+
+        .signature{
+            margin: auto;
+            margin-top: 30px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .signature button{
+            padding: 10px 70px;
+            border: none;
+            border-top: solid 2px #000066;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <header class="receipt_header">
+            <div class="receipt_header_left">
+                <img src="{% static 'img/logoimage.jpg' %}" width="100%" height="100%" alt="">
+            </div>
+            <div class="receipt_header_right">
+                <p>
+                    <span class="red-text">Ibadan Branch Office</span><br>
+                    <span>Arulogun Ojo road, Opp First Bank Gate, Odogbo Barracks, 3rd Building (Cream/Brown) after Keto Oil Petrol Station
+                        Ojo Area, Ibadan, Oyo State.
+                    </span>
+                </p>
+                <br>
+                <p>
+                    <span class="red-text">Oyo Alaafin Branch Office</span>
+                    <span>
+                        Rufuk House, Opp. Immanuel Baptist Church, Alagon, Owode Area, Oyo Town, Oyo Stae.
+                    </span>
+                </p>
+                <p class="red-text">+234 (0) 816-919-4772</p>
+            </div>
+        </header>
+        <div class="type">
+            <p class="l-text">PAYMENT RECEIPT <small>SE/Ib/-0{{payment.id}}</small></p>
+            <p class="r-text">Date <button>{{payment.dateStrip}}</button></p>
+
+        </div>
+
+        <table>
+            <tr class="tr">
+                <td class="table-info">Receive From</td>
+                <td class="table-data">{{payment.purchase.customer}}</td>
+            </tr>
+            <tr>
+                <td class="table-info">The Sum of </td>
+                <td class="table-data">#{{payment.depositpayment}} only</td>
+            </tr>
+            <tr>
+                <td class="table-info">Being payment of</td>
+                <td class="table-data">{{payment.purchase.propertypurchase}}</td>
+            </tr>
+            <tr>
+                <td class="table-info">Date</td>
+                <td class="table-data">{{payment.dateStrip}}</td>
+            </tr>
+            <tr>
+                <td class="table-info">Payment methon</td>
+                <td class="table-data">{{payment.method}}</td>
+            </tr>
+            <tr >
+                <td style="padding: 20px 5px 0 5px;">Balance to pay <span style="color: red"> {{payment.purchase.balance_to_pay}}</span></td>
+            </tr>
+        </table> 
+        <div class="signature">
+            <button>Customer's Sign</button>
+            <button>For SWEET ESTATE</button>
+        </div>
+
+    </div>
+</body>
+</html>

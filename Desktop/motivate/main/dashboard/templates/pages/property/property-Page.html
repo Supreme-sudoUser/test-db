@@ -1,0 +1,54 @@
+{% extends 'pages/property/property.html' %}
+{% load static %}
+
+{% block property %}
+
+
+
+<br>
+
+
+<table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+    <thead>
+        <!-- <div class="d-flex mb-3 mt-3 align-item-center"> -->
+            <h4 class="">Payment History for {{ properties }}</h4>
+            <p class="">Total plot Acquired {{ properties.quantity }}</p>
+            <p>Property plot remaining, {{ properties.remainQuantity }}</p>
+            <p>Property plot sold, {{ properties.soldQuantity }}</p>
+        <!-- </div> -->
+        <tr>
+            <th>No</th>
+            <th>Customer</th>
+            <th>Plots</th>
+            <th>Phone</th>
+            <th>Total Paid</th>
+            <th>Date</th>
+            <th>Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for purchases in purchase %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td> <a href="{% url 'customerPage' purchases.customer.id %}">{{ purchases.customer }}</a></td>
+            <td>{{ purchases.quantity }}</td>
+            <td>{{ purchases.customer.phoneNumber }}</td>
+            <td>{{ purchases.totalPaid }}</td>
+            <td>{{ purchases.dateStrip }}</td>
+            <td>{{ purchases.percentPaid }} paid</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td> </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ percentage }}</td>
+
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

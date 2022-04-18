@@ -1,0 +1,104 @@
+{% extends 'pages/customer/customer.html' %}
+{% load static %}
+
+{% block customer %}
+<style>
+    input, select{
+                   
+       display: block;
+       width: 100%;
+       height: calc(1.5em + 0.75rem + 2px);
+       padding: 0.375rem 0.75rem;
+       font-size: 1rem;
+       font-weight: 400;
+       line-height: 1.5;
+       color: #6e707e;
+       background-color: #fff;
+       background-clip: padding-box;
+       border: 1px solid #d1d3e2;
+       border-radius: 0.35rem;
+    }
+    .openform{
+        display: block;
+    }
+    
+    .closeform{
+        display: none;
+    }
+    
+</style> 
+    <button class="btn btn-info mb-4" id="newPurchase" onclick="openPurchase()">Add a new purchase</button>
+    <div class="px-1 py-3 underline closeform" id="purchaseDiv">
+        <form class="col" method="POST">
+            <h5>Add new purchase</h5>
+            {% csrf_token %}
+            <div class="form-group col-lg-4 col-sm-12">
+                
+                {{form}}
+            </div>
+
+
+            <input type="submit" value="New Pruchase" class="btn btn-warning col-lg-4 col-sm-12">
+        </form>
+        <br>
+        <button class="btn btn-secondary ml-3" id="closePurchase" onclick="closePurchase()">close form</button>
+    </div>
+<!-- </div> -->
+
+<script>
+    let purchaseDiv = document.getElementById("purchaseDiv")
+    let btn = document.getElementById("newPurchase")
+    let clsBtn = document.getElementById("closePurchase") 
+
+    const openPurchase = () => {
+
+        btn.addEventListener('click', ()=> {
+            purchaseDiv.style.display = "block"
+            console.log("Its works")
+        
+        })
+    }
+
+    const closePurchase = () => {
+
+        clsBtn.addEventListener('click', ()=> {
+            purchaseDiv.style.display = "none"
+            console.log("Its second works")
+        
+        })
+    }
+
+
+</script>
+
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+        <thead>
+            <h4 class="mb-3 mt-3">List of Property Purchased and Date</h4>
+
+            <tr>
+                <th>Purchase order</th>
+                <th>Property</th>
+                <th>Quantity (/ plot)</th>
+                <th>Actual Payment</th>
+                <th>Date Acquired</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for items in purchaseItem %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ items.propertypurchase }}</td>
+                <td>{{ items.quantity }}</td>
+                <td>#{{ items.actual_payment }}</td>
+                <td>{{ items.date_created }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+{% endblock %}

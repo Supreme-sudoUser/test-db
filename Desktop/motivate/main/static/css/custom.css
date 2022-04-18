@@ -1,0 +1,6 @@
+
+.bg-logoimage{
+    background-image: url("./logoimage.jpg");
+  background-position: center;
+  background-size: cover;
+}

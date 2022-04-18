@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<head>
+    <style>
+        input, select{
+                    
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #6e707e;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d1d3e2;
+        border-radius: 0.35rem;
+        }
+
+        .close_search{
+            display: none;
+        }
+    </style>
+</head> 
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">All Payments Available For Filtering</h1>
+
+    <!-- Search container --> 
+    <div class="card mb-4 shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Look up payment Here</h6>
+        </div>
+        <div class="card-body">
+
+        <button class="btn btn-info mb-4 mr-3" id="openSearch" onclick="openSearch()">Filter payment</button>
+
+        <form action="">
+            <div class="form-row col-lg-4 close_search" id="searchDiv">
+                <table> 
+                    <tbody>
+                        <tr>
+                            <td>Paymentplan</td>
+                            <td>
+                                <select name="paymentplan" id="id_paymentplan">
+                                    <option value="" selected="">---------</option>
+                                    <option value="outright">outright</option>
+                                    <option value="3 month installment">3 month installment</option>
+                                    <option value="6 month installment">6 month installment</option>
+                                    <option value="9 month installment">9 month installment</option>
+                                    <option value="12 month installment">12 month instalment</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>PaymentMethod</td>
+                            <td><input type="text" name="paymentMethod" id="id_paymentMethod"></td>
+                        </tr>   
+                        <tr>
+                            <td>Date is greater than or equal to</td>
+                            <td><input type="text" name="start_date" id="id_start_date"></td>
+                        </tr>
+                        <tr>
+                            <td>Date is less than or equal to</td>
+                            <td><input type="text" name="end_date" id="id_end_date"></td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <button type="submit" class="btn btn-primary btn-block py-2 mt-3">Submit</button>
+                <button class="btn btn-info mb-4 mt-4 mr-3" id="closeSearch" onclick="closeSearch()">close Filter</button>
+            </div>
+        </form> 
+            
+        </div>
+    </div>
+
+    
+<script>
+let purchaseDiv = document.getElementById("searchDiv")
+let btn = document.getElementById("openSearch")
+let clsBtn = document.getElementById("closeSearch")
+const openSearch = () => {
+
+    btn.addEventListener('click', ()=> {
+        purchaseDiv.style.display = "block"
+    
+    })
+}
+
+const closeSearch = () => {
+
+    clsBtn.addEventListener('click', ()=> {
+        purchaseDiv.style.display = "none"
+    
+    })
+}
+
+
+</script>
+
+    <!-- DataTables Customer DB Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Customer List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <div class="row">
+                            <div class="col">
+                                <!-- <span class="mb-4"><button id="viewByName" onclick="viewByName()" class="btn btn-info mr-3">View by Name</button><button onclick="viewByDate()" class="btn btn-info mr-3">View by Date</button></span> -->
+                                <p id="customerCount">All Payments {{ customersDate.count }}</p>
+                            </div>
+                        </div>
+                        <tr>
+                            <th>No</th>
+                            <th>Customer Name</th>
+                            <th>Property</th>
+                            <th>Payment</th>
+                            <th>Date Registered</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot> 
+                    <tbody>
+                        <span id="customerLoop">{% for eachpayment in payment %}</span>
+                        <tr class="position-relative">
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>{{ eachpayment.purchase.customer }}</td>
+                            <td>{{ eachpayment.purchase.propertypurchase }}</td>
+                            <td>#{{ eachpayment.depositpayment }}</td>
+                            <td>{{ eachpayment.dateStrip }}</td>
+                            <td><a class="btn btn-primary" href="{% url 'customerPaymentList' eachpayment.purchase.customer.id %}">View</a></td>
+                        </tr>
+                        <span id="customerEndLoop">{% endfor %}</span>
+                    </tbody>
+                </table>
+
+                
+
+            </div>
+        </div>
+    </div>
+    <!-- DataTables Ends -->
+
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}

@@ -1,0 +1,105 @@
+
+
+{% extends '../../base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<head>
+    <style>
+        input, select{
+                       
+           display: block;
+           width: 100%;
+           height: calc(1.5em + 0.75rem + 2px);
+           padding: 0.375rem 0.75rem;
+           font-size: 1rem;
+           font-weight: 400;
+           line-height: 1.5;
+           color: #6e707e;
+           background-color: #fff;
+           background-clip: padding-box;
+           border: 1px solid #d1d3e2;
+           border-radius: 0.35rem;
+        }
+    </style>
+</head>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="heading">
+            <h3>Add New Property Here</h3>
+            <!-- <div class="location"></div> -->
+        </div>
+    </div>
+ 
+<!-- form main container -->
+
+    <div class="row">
+        <div class="col card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Create Property</h6>
+            </div> 
+            <div class="px-1 py-3 underline">
+                <form class="col" method="POST">
+                    {% csrf_token %}        
+                    
+                    <!-- Property data fieldset --> 
+                    <fieldset class="form-group border p-3">
+                        <legend class="w-auto px-2">Property Data and Information</legend> 
+                        <table>   
+                        <div class="form-group col-lg-4 col-sm-12">
+                            <tr>
+                                <td>{{form.name.label}}: </td>
+                                <td class="ml-4">{{form.name}}</td>
+                            </tr>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-12">
+                            <tr>
+                                <td>{{form.price.label}}: </td>
+                                <td class="ml-4">{{form.price}}</td>
+                            </tr>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-12">
+                            <tr>
+                                <td>{{form.location.label}}: </td>
+                                <td class="ml-4">{{form.location}}</td>
+                            </tr>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-12">
+                            <tr>
+                                <td>{{form.quantity.label}}: </td>
+                                <td class="ml-4">{{form.quantity}}</td>
+                            </tr>
+                        </div> 
+                        </table>
+                        <br><br>
+                        <input type="submit" value="Create Property" class="col-lg-3 bg-primary text-light">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

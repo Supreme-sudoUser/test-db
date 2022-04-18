@@ -1,0 +1,45 @@
+{% extends 'pages/customer/customer.html' %}
+
+{% load static %}
+
+<head> 
+    <title>Send Whatsapp text</title>
+</head>
+{% block customer %}
+ 
+<style> 
+
+    .input, textarea, .input-submit{
+        width: 70%;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: solid 2px rgba(5, 96, 206, 0.83);
+    }
+
+    .input-submit{
+        width: 70%;
+        color: #fff;
+        background-color: rgba(5, 96, 206, 0.83);
+        font-size: larger;
+        text-align: left;
+    }
+
+    .input-submit::placeholder{
+        color: #fff;
+        text-align: center;
+    }
+</style> 
+<marquee class="col-lg-4 col-md-6 col-sm-12" behavior="left" direction=""><small>Message will be sent to whatsapp</small></marquee>
+<form action="whatappMessage" method="POST" class="form col col-lg-6 col-sm-12">
+    {% csrf_token %}
+    <h3>Confirm number</h3>
+    <input type="phone" id="phone" required autofocus value="{{ customer.phoneNumber }}" name="phone" aria-describedby="phone" class="input">
+    <br> <br> <br>
+    <textarea name="message" required id="message" rows="10" placeholder="Enter Message here"></textarea>
+    <br> <br>
+    <input type="Submit" placeholder="Send Message" class="input-submit">
+    <br>{{msg}}
+</form> 
+
+
+{% endblock %}

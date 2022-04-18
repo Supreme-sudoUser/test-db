@@ -1,0 +1,169 @@
+{% extends 'pages/customer/customer.html' %}
+{% load static %}
+
+{% block customer %}
+
+<style>
+
+    input, select{
+                    
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #6e707e;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d1d3e2;
+        border-radius: 0.35rem;
+        }
+
+    .openform{
+        display: block;
+    }
+
+    .closeform{
+        display: none;
+    }
+
+</style> 
+    <button class="btn btn-info mb-4" id="newPurchase" onclick="openPurchase()">Add payment</button>
+    <br>
+    <div class="px-1 py-3 underline closeform" id="purchaseDiv">
+    
+    <!-- new payment form -->
+    {% if purchase %}
+    <form class="col" method="POST">
+        <h5>Add new payment</h5>
+        {% csrf_token %}
+        <div class="form-group col-lg-4 col-sm-12">
+            
+            {{form}}
+        </div>
+
+
+        <input type="submit" value="New Payment" class="btn btn-warning col-lg-4 col-sm-12">
+    </form>
+    <br>
+    <button class="btn btn-secondary ml-3" id="closePurchase" onclick="closePurchase()">close form</button>
+
+    {% else %}
+    <marquee behavior="" direction=""><span class="text-danger"> Please make a Purchase first</span></marquee>
+
+    <br>
+    <button class="btn btn-secondary ml-3" id="closePurchase" onclick="closePurchase()">close form</button>
+
+    {% endif %}</div>
+<!-- </div> -->
+<button class="btn btn-secondary mb-4" id="openSummary" onclick="openSummary()">Open Summary</button>
+    <!-- payment summarizes -->
+    <div class="table-responsive py-4" id="summaryDiv">
+        <table class="col-lg-6 table table-bordered">
+            <t>
+                <th>Property</th>
+                <th>Expected</th>
+                <th>Total Paid</th>
+                <th>To balance</th>
+            </tr>
+            {% for eachpurchases in purchase %}
+            <tr>
+                <td>{{eachpurchases.propertypurchase}}</td>
+                <td>{{eachpurchases.actual_payment}}</td>
+                <td>#{{eachpurchases.totalPaid}}</td>
+                <td>#{{eachpurchases.balance_to_pay}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+        <button class="btn btn-secondary ml-3" id="closeSummary" onclick="closeSummary()">close summary</button>
+    </div>
+    <!-- summarizes ends -->
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Purchase order</th>
+            <th>Property</th>
+            <th>Plot(s)</th>
+            <th>Payment Plan</th>
+            <th>Initial payment</th>
+            <th>Deposited payment</th> 
+            <th>Percentage</th>
+            <th>Payment Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% for eachpurchases in purchase %}
+
+        <tbody>
+        {% for payment in eachpurchases.customerpayment.all %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ payment.purchase.propertypurchase }}</td>
+            <td>{{ payment.purchase.quantity }}</td>
+            <td>{{ payment.paymentplan }}</td>
+            <td>#{{ payment.purchase.actual_payment }}</td>
+            <td>#{{ payment.depositpayment }}</td> 
+            <td>{{ payment.percent }} paid</td>
+            <td>{{ payment.date_created }}</td>
+            <td><a class="btn btn-info" href="{% url 'receipts' payment.id %}">Print Receipt</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    {% endfor %}
+    </table>
+</div>
+
+    
+<script>
+    // for the form
+    let purchaseDiv = document.getElementById("purchaseDiv")
+    let btn = document.getElementById("newPurchase")
+    let clsBtn = document.getElementById("closePurchase")
+    const openPurchase = () => {
+
+        btn.addEventListener('click', ()=> {
+            purchaseDiv.style.display = "block"
+            console.log("Its works")
+        
+        })
+    }
+
+    const closePurchase = () => {
+
+        clsBtn.addEventListener('click', ()=> {
+            purchaseDiv.style.display = "none"
+            console.log("Its second works")
+        
+        })
+    }
+
+    
+    // for summary
+    let summaryDiv = document.getElementById("summaryDiv")
+    let summaryBtn = document.getElementById("openSummary")
+    let summaryClsBtn = document.getElementById("closeSummary")
+    const openSummary = () => {
+
+        summaryBtn.addEventListener('click', ()=> {
+            summaryDiv.style.display = "block"
+            console.log("Its works")
+        
+        })
+    }
+
+    const closeSummary = () => {
+
+        summaryClsBtn.addEventListener('click', ()=> {
+            summaryDiv.style.display = "none"
+            console.log("Its second works")
+        
+        })
+    }
+
+</script>
+{% endblock %}

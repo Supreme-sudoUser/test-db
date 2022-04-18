@@ -1,0 +1,98 @@
+{% extends 'frame.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body{
+        /* background-size: cover; */
+        background-blend-mode: color-burn;
+        /* background-color: aqua; */
+        background-color: rgba(0, 0, 0, 0.334);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url({% static 'img/SW-house.jpg' %});
+        
+    }
+</style>
+
+<body>
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block logo-bg-left">
+                        
+                        <!-- <img src="{% static 'img/logoimage.jpg' %}" width="100%" style="padding: 3px; align-items: center; border-right: dashed 5px rgba(181, 181, 181, 0.234);" alt=""> -->
+                    </div>
+                    <div class="col-lg-7 logo-bg-right">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form method="post" class="user">
+                                {% csrf_token %} 
+                                <!-- {{form}} -->
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {{ form.firstname }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.lastname }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        {{ form.username }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.email }}
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{ form.password1 }}
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form.password2 }}
+                                    </div>
+                                    <marquee behavior="" direction="left" class="text-warning">Password should be 8 characters or more</marquee>
+                                    <div class="form-group px-4 text-light">
+                                    <span class="mr-3">{{ form.is_admin.label }}: {{ form.is_admin }} </span><span> {{ form.is_staff.label }}: {{ form.is_staff }}</span>
+                                    </div>
+                                </div>
+                                <!-- <br> -->
+                                <button type="submit" class="form-control button">Register Account</button>
+                            
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <!-- <a class="small small-text" href="{% url 'forgotpassword' %}">Forgot Password?</a> -->
+                            </div>
+                            <div class="text-center">
+                                <a class="small small-text" href="{% url 'login' %}">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+{% endblock %}

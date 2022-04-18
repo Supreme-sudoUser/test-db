@@ -1,0 +1,196 @@
+{% extends '../../base.html' %}
+
+{% block content %}
+ <head>
+     <style>
+         input, select{
+                        
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6e707e;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #d1d3e2;
+            border-radius: 0.35rem;
+         }
+     </style>
+ </head>
+<div class="container-fluid">
+    <div class="row">
+        <div class="heading">
+            <h3>Create Customer Page</h3>
+            <!-- <div class="location"></div> -->
+        </div>
+    </div>
+ 
+<!-- form main container -->
+
+    <div class="row">
+        <div class="col card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Create Customer <span class="text-warning">Step 1</span> </h6>
+            </div> 
+            <div class="px-1 py-3 underline">
+                <form class="col" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- personal data fieldset --> 
+                    <fieldset class="form-group border p-3">
+                        <legend class="w-auto px-2">Personal Data and Contact</legend>
+                        <div class="form-row">
+                            
+                            <div class="form-group col-sm-12">
+                                <label for="id_title">Select<span class="text-danger">*</span></label>
+                                {{form.title}}
+                               
+                            </div>
+
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_surname">Surname Name<span class="text-danger">*</span></label>
+                                {{form.surname}}
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_firstName">First Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control"  name="firstName" maxlength="100" required="" id="id_firstName">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_otherName">Other Name</label>
+                                {{form.otherName}}
+                            </div>
+                        </div>
+
+                        <h5>Gender</h5>
+                        <div class="form-row">
+
+                                          
+                            <div class="form-group col-sm-12">
+                                <label for="id_gender">Select<span class="text-danger">*</span></label>
+                                {{form.gender}}
+                            </div>      
+ 
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group col-lg-6 col-sm-12">
+                                <label for="">Upload Passport</label>
+                                {{form.passport}}
+                            </div>
+                            <div class="form-group col-lg-6 col-sm-12">
+                                <label for="id_maritalstatus">Marital Status<span class="text-danger">*</span></label>
+                                {{form.maritalstatus}}
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-row">
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_maidenName">Maiden Name</label>
+                                {{form.maidenName}}
+                            </div>
+
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_dateOfBirth">Date of Birth <span class="text-danger">(YYYY-MM-DD)*</span></label>
+                                {{form.dateOfBirth}}
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_email">Email</label>
+                                {{form.email}}
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                        
+
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_phoneNumber">Phone Numer <span class="text-danger">*</span></label>
+                                {{form.phoneNumber}}
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_homeTelephone"> Home Telephone</label>
+                                {{form.homeTelephone}}
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_customerHomeAddress">Customer Home Address<span class="text-danger">*</span></label>
+                                {{form.customerHomeAddress}}
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Next of king fieldset -->
+                    <fieldset class="form-group border p-2">
+                        <legend class="w-auto px-2">Next of Kin</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="id_nk_fullName">Full Name</label>
+                                {{form.nk_fullName}}
+                            </div>
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="id_nk_telephone">Telephone</label>
+                                {{form.nk_telephone}}
+                            </div>
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="id_nk_email">Email</label>
+                                {{form.nk_email}}
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+
+                    <!-- Employment fieldset -->
+                    <fieldset class="form-group border p-2">
+                        <legend class="w-auto px-2 col">Current Employment Details</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_employer">Employer</label>
+                                {{form.employer}}
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_em_designation">Designation</label>
+                                {{form.em_designation}}
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_em_telephone">Telephone</label>
+                                {{form.em_telephone}}
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_em_address">Address</label>
+                                {{form.em_address}}
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group col-lg-4 col-sm-12">
+                        <label for="id_heard_about_us">HOW DID YOU HEAR ABOUT US?<span class="text-danger">*</span> </label>
+                                {{form.heard_about_us}}
+                                <br>
+                                <label for="id_em_address">Others:</label>
+                                <!-- <p class="text-warning">If through friend;</p> -->
+                                {{form.heard_about_person}}
+                    </div>
+                    <div>
+                        {{msg}}
+                    </div>
+                    <!-- property fieldset -->
+                   <div class="col-lg-4 col-sm-12">
+                       <marquee behavior="" direction="">Confirm to fill input with red astericks ( <span class="text-danger">*</span> )</marquee>
+                   </div>
+                   <button type="submit" class="btn btn-primary">Create Customer Data</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

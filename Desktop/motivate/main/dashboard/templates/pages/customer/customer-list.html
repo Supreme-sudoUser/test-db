@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <head>
+        <style>
+            input, select{
+                        
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6e707e;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #d1d3e2;
+            border-radius: 0.35rem;
+            }
+
+            .theForm{
+                display: none;
+            }
+        </style>
+    </head> 
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">All Customer List Available For Filtering</h1>
+
+        <!-- Search container -->
+        <!-- <p id="url-list"></p> -->
+        <div class="card mb-4 shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Search Customer Here</h6>
+            </div>
+            <div class="card-body">
+
+                <!-- =======================================================================
+                ==============================
+            ============================== -->
+            <button class="btn btn-info mb-4 mr-3" id="openSearch" onclick="openSearch()">Search Customer</button>
+
+            <form action="">
+                <div class="form-row theForm col-lg-4 col-sm-12" id="searchDiv">
+                                      
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Surname</td>
+                                <td><input type="text" name="surname" id="id_surname"></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>FirstName</td>
+                                <td><input type="text" name="firstName" id="id_firstName"></td>
+                            </tr>       
+                            <tr>
+                                <td>Gender</td>
+                                <td>
+                                    <select name="gender" id="id_gender">
+                                        <option value="" selected="">---------</option>
+
+                                        <option value="Male">Male</option>
+
+                                        <option value="Female">Female</option>
+
+                                        <option value="Others">Others</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>DateRegistered is greater than or equal to</td>
+                                <td><input type="text" name="start_date" id="id_start_date"></td>
+                            </tr>
+                            <tr>
+                                <td>DateRegistered is less than or equal to</td>
+                                <td><input type="text" name="end_date" id="id_end_date"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary btn-block py-2 mt-3">Submit</button>
+                    <button class="btn btn-info mb-4 mt-4 mr-3" id="closeSearch" onclick="closeSearch()">close Filter</button>
+                </div>
+            </form>
+ 
+                <!-- code to display current url -->
+                <!-- <script>
+                    let url = document.getElementById('url-list');
+                    url.innerHTML = window.location.pathname
+                </script> -->
+              
+            </div>
+        </div>
+
+        
+
+        <!-- DataTables Customer DB Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Customer List</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <div class="row">
+                                <div class="col">
+                                    <p id="customerCount">Total number of Customers, {{ customersName.count }}</p>
+                                </div>
+                            </div>
+                            <tr>
+                                <th>No</th>
+                                <th>Customer Name</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>Date of Registered</th>
+                            </tr>
+                        </thead>
+                        <tfoot> 
+                        <tbody>
+                            <span id="customerLoop">{% for customer in customersName %}</span>
+                            <tr class="position-relative">
+
+                                <td>{{ forloop.counter }}</td>
+
+                                <td><a href="{% url 'customerPage' customer.id %}">{{ customer }}</a></td>
+                                <td>{{ customer.gender }}</td>
+                                <td>{{ customer.phoneNumber }}</td>
+                                <td>{{ customer.dateRegistered }}</td>
+                            </tr>
+                            <span id="customerEndLoop">{% endfor %}</span>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- DataTables Ends -->
+
+    </div>
+    <!-- /.container-fluid -->
+
+   
+   
+    <script>
+        let searchDiv = document.getElementById("searchDiv")
+        let btn = document.getElementById("openSearch")
+        let clsBtn = document.getElementById("closeSearch")
+        const openSearch = () => {
+        
+            btn.addEventListener('click', ()=> {
+                searchDiv.style.display = "block"
+            
+            })
+        }
+        
+        const closeSearch = () => {
+        
+            clsBtn.addEventListener('click', ()=> {
+                searchDiv.style.display = "none"
+            
+            })
+        }
+        
+        
+    </script>
+
+{% endblock %}
+ 

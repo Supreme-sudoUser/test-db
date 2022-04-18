@@ -1,0 +1,64 @@
+{% extends 'frame.html' %}
+
+{% load static %}
+{% block content %}
+
+<style>
+    body{
+        /* background-size: cover; */
+        background-blend-mode: color-burn;
+        /* background-color: aqua; */
+        background-color: rgba(0, 0, 0, 0.734);
+        background-repeat: no-repeat;
+        background-image: url({% static 'img/background.jpg' %});
+        
+    }
+</style>
+
+<body>
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block logo-bg-left">
+                                <!-- <img src="{% static 'img/logoimage.jpg' %}" width="100%" style="padding: 3px; align-items: center; border-right: dashed 5px rgba(181, 181, 181, 0.234);" alt=""> -->
+                            </div>
+                            <div class="col-lg-6 logo-bg-right">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    <form method="post" class="user">
+                                        {% csrf_token %}
+                                        {{ form }}
+                                        <br>
+                                        <button type="submit" class="form-control button">Login </button>
+                                       
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <!-- <a class="small small-text" href="{% url 'forgotpassword' %}">Forgot Password?</a> -->
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small small-text" href="{% url 'register' %}">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+
+{% extends '../../base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<!-- This is the base template for customer details and everything related to customer details -->
+
+
+<!-- uses the custome.css -->
+
+
+<div class="container m-2 py-2">
+
+    <div class="row">
+            
+        <div class="col col-lg-6 mb-3">
+            <div style="display: flex; align-items: baseline;">
+                <h3>{{ user }} </h3>
+            </div>
+        </div>
+    </div>
+        <!-- <div class="location">Akinmorin</div>location</div> -->
+    <div class="row mt-4">
+        <div class="col card py-2">
+
+            <p>
+            <a href="{% url 'propertyList' %}" class="btn btn-secondary text-light col-lg-2 p-2">List all properties</a>
+            </p>
+            
+         
+            <div class="col-lg-12">
+            {% block property %}
+
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

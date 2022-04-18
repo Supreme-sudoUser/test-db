@@ -1,0 +1,199 @@
+{% extends '../../base.html' %}
+
+{% block content %}
+ 
+<div class="container-fluid">
+    <div class="row">
+        <div class="heading">
+            <h3>Create Customer Page</h3>
+            <div class="location">Akinmorin</div>
+        </div>
+    </div>
+ 
+<!-- form main container -->
+
+    <div class="row">
+        <div class="col card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Create Customer </h6>
+            </div> 
+            <div class="px-1 py-3 underline">
+                <form class="col">
+                    {% csrf_token %}
+                    <!-- personal data fieldset --> 
+                    <fieldset class="form-group border p-3">
+                        <legend class="w-auto px-2">Personal Data and Contact</legend>
+                        <div class="form-row">
+                            
+                            <div class="form-group col-sm-12">
+                                <label for="id_title">Select<span class="text-danger">*</span></label>
+                                <select name="title" id="id_title" class="form-control">
+                                <option active>Title</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Others">Others</option>
+                                <option>...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_surname">Surname Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="surname" maxlength="100" required="" id="id_surname">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_firstName">First Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control"  name="firstName" maxlength="100" required="" id="id_firstName">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_otherName">Other Name</label>
+                                <input type="text" class="form-control" name="otherName" maxlength="100" id="id_otherName">
+                            </div>
+                        </div>
+
+                        <h5>Gender</h5>
+                        <div class="form-row">
+
+                                          
+                            <div class="form-group col-sm-12">
+                                <label for="id_gender">Select<span class="text-danger">*</span></label>
+                                <select name="gender" id="id_gender" class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others" selected="">Others</option>
+                                    <option>...</option>
+                                </select>
+                            </div>      
+ 
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group col-lg-6 col-sm-12">
+                                <label for="">Upload Passport</label>
+                                <input type="file" class="form-control py-1" name="" id="">
+                            </div>
+                            <div class="form-group col-lg-6 col-sm-12">
+                                <label for="id_maritalstatus">Marital Status<span class="text-danger">*</span></label>
+                                <select name="maritalstatus" id="id_maritalstatus" class="form-control">
+                                    <option>....</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorce">Divorce</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Others" selected="">Others</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-row">
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_maidenName">Maiden Name</label>
+                                <input type="text" name="maidenName" maxlength="100" id="id_maidenName" class="form-control">
+                            </div>
+
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_dateOfBirth">Date of Birth<span class="text-danger">*</span></label>
+                                <input type="text" name="dateOfBirth" maxlength="100" id="id_dateOfBirth" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_email">Email</label>
+                                <input type="text" name="email" maxlength="100" id="id_email" class="form-control">
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                        
+
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_phoneNumber">Phone Numer <span class="text-danger">*</span></label>
+                                <input type="text" name="phoneNumber" maxlength="100" id="id_phoneNumber" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_homeTelephone"> Home Telephone</label>
+                                <input type="text" class="form-control" name="homeTelephone" maxlength="100" id="id_homeTelephone">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="id_customerHomeAddress">Customer Home Address<span class="text-danger">*</span></label>
+                                <input type="textarea" class="form-control" name="customerHomeAddress" maxlength="1000" id="id_customerHomeAddress" placeholder="Apartment, studio, or floor">
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Next of king fieldset -->
+                    <fieldset class="form-group border p-2">
+                        <legend class="w-auto px-2">Next of Kin</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="id_nk_fullName">Full Name</label>
+                                <input type="text" name="nk_fullName" maxlength="100" id="id_nk_fullName" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="id_nk_telephone">Telephone</label>
+                                <input type="text" name="nk_telephone" maxlength="100" id="id_nk_telephone" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="id_nk_email">Email</label>
+                                <input type="text"  name="nk_email" maxlength="100" id="id_nk_email" class="form-control">
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+
+                    <!-- Employment fieldset -->
+                    <fieldset class="form-group border p-2">
+                        <legend class="w-auto px-2 col">Current Employment Details</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_employer">Employer</label>
+                                <input type="text" name="employer" maxlength="100" id="id_employer" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_em_designation">Designation</label>
+                                <input type="text"  name="em_designation" maxlength="100" id="id_em_designation" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_em_telephone">Telephone</label>
+                                <input type="text" name="em_telephone" maxlength="100" id="id_em_telephone" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="id_em_address">Address</label>
+                                <input type="text" name="em_address" maxlength="100" id="id_em_address" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group col-lg-4 col-sm-12">
+                        <label for="id_heard_about_us">HOW DID YOU HEAR ABOUT US?<span class="text-danger">*</span> </label>
+                        <select name="heard_about_us" id="id_heard_about_us" class="form-control">
+                            <option value="Radio Station">Radio Station</option>
+                            <option value="Magazine">Magazine</option>
+                            <option value="Newspaper">Newspaper</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Website">Website</option>
+                            <option value="A friend">A friend</option>
+                            <option value="Somewhere Online" selected="">Somewhere Online</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+
+                    <!-- property fieldset -->
+                   <div class="col-lg-4 col-sm-12">
+                       <marquee behavior="" direction="">Confirm to fill input with red astericks ( <span class="text-danger">*</span> )</marquee>
+                   </div>
+                    <input type="submit" value="Create Customer Data" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

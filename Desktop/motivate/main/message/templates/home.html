@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Whatsapp text</title>
+    <style>
+        .form{
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+            border-radius: 5px;
+            border: solid 2px rgba(5, 96, 206, 0.83);
+        }
+
+        .input, textarea, .input-submit{
+            width: 70%;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: solid 1px rgba(5, 96, 206, 0.83);
+        }
+
+        .input-submit{
+            width: 70%;
+            color: #fff;
+            background-color: rgba(5, 96, 206, 0.83);
+            font-size: larger;
+            text-align: left;
+        }
+
+        /* .input-submit::placeholder{
+            color: #fff;
+        } */
+    </style>
+</head>
+<body>
+    <h1 style="margin: auto;">Send message here</h1>
+<br><br><br><br><br><br>
+<form action="sendData" method="post" class="form">
+    {% csrf_token %}
+    <h3>Input Your Number here</h3>
+    <input type="phone" id="phone" required autofocus placeholder="eg. +2347051900086" name="phone" aria-describedby="phone" class="input">
+    <br> <br> <br>
+    <textarea name="message" required id="message" rows="10" placeholder="Enter Message here"></textarea>
+    <br> <br>
+    <input type="Submit" placeholder="Send Message" class="input-submit">
+    {{msg}}
+</form>
+
+
+</body>
+</html>
